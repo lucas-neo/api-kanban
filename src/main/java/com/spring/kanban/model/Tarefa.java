@@ -65,4 +65,12 @@ public class Tarefa {
 
     public void setId(int id) {
     }
+
+    public void setTitulo(@NotNull(message = "O título é obrigatório") String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

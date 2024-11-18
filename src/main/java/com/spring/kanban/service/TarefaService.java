@@ -24,9 +24,22 @@ public class TarefaService {
         return tarefaRepository.findAll();
     }
 
-    public Tarefa editarTarefa(Tarefa tarefa) {
-        return tarefaRepository.save(tarefa);
+    public Tarefa editarTarefa(int id, Tarefa tarefa) {
+        // Verifica se a tarefa com o ID especificado existe
+        Tarefa tarefaExistente = tarefaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + id));
+
+        // Atualiza os campos da tarefa existente com os valores do JSON
+        tarefaExistente.setTitulo(tarefa.getTitulo());
+        tarefaExistente.setDescricao(tarefa.getDescricao());
+        tarefaExistente.setStatus(tarefa.getStatus());
+        tarefaExistente.setPrioridade(tarefa.getPrioridade());
+        tarefaExistente.setDataLimite(tarefa.getDataLimite());
+
+        // Salva e retorna a tarefa atualizada
+        return tarefaRepository.save(tarefaExistente);
     }
+
 
     public Tarefa buscarTarefaPorId(int id) {
         return tarefaRepository.findById(id).orElseThrow(() -> new RuntimeException("Tarefa não existe"));

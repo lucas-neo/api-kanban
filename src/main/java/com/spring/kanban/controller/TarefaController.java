@@ -39,9 +39,11 @@ public class TarefaController {
     }
 
     @PutMapping("/{id}/editar")
-    public Tarefa editar(@RequestBody Tarefa tarefa) {
-        return tarefaService.editarTarefa(tarefa);
+    public Tarefa editar(@PathVariable int id, @RequestBody Tarefa tarefa) {
+        // Garante que o ID do path seja usado
+        return tarefaService.editarTarefa(id, tarefa);
     }
+
 
     @GetMapping("/{id}")
     public Tarefa listarTarefaPorId(@PathVariable int id) {
